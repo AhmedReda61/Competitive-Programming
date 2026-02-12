@@ -9,14 +9,14 @@ constexpr int mod = 1000000007;
 
 struct edge {
     int idx;ll cost;
-    friend bool operator<(const edge& a ,const edge& b) {
-        return a.cost > b.cost;
+    friend bool operator<(const edge& b ,const edge& a) {
+        return a.cost < b.cost;
     }
 };
 
 int N;
 vector<vector<edge>> adj;
-vector<ll> dist;
+vector<ll> dist; // must be initially INF
 vector<int> parent;// for printing the path
 
 
@@ -37,7 +37,7 @@ void dijkstra(int s , vector<int>& init) { // O( E log(E) ) // init for multiple
         if (curr.cost > dist[curr.idx])continue; // hence, you calculated before;
 
         for (auto nxt : adj[curr.idx]){
-            if (dist[nxt.idx]==-1||nxt.cost + curr.cost< dist[nxt.idx]) {
+            if (nxt.cost + curr.cost < dist[nxt.idx]) {
 
                 dist[nxt.idx] = curr.cost + nxt.cost;
                 pq.push({nxt.idx,dist[nxt.idx]});
@@ -55,19 +55,6 @@ void dijkstra(int s , vector<int>& init) { // O( E log(E) ) // init for multiple
 void fast();
 signed main() {
     fast();
-
-    int M;cin >> N >> M;
-
-    adj.resize(N+1);
-    dist.resize(N+1,-1);
-
-
-    while (M--){
-        int u,v,w;cin >> u >> v >> w;
-        adj[u].push_back({v,w});
-        adj[v].push_back({u,w});
-    }
-
 }
 void fast() {
     ios::sync_with_stdio(false);
