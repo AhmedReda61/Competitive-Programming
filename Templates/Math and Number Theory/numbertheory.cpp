@@ -111,7 +111,7 @@ vector<pair<int,int>> factor3(int n) {
 
 
 // divisors O(NlogN)
-vector<vector<int>> Div(N);
+vector<vector<int>> Div(N+1);
 void factors() {
     for (int i = 1; i <= N; ++i) {
         for (int j = i; j <= N; j+=i) {
