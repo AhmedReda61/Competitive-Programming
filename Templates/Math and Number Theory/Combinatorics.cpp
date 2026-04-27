@@ -10,16 +10,12 @@ constexpr int mod = 1e9 + 7;
 
 ll fpow(ll a, ll b , ll m = mod) {
     ll res = 1;
-    a %= m;
-    while(b) {
-        if(b & 1)res = res * a % m;
-        a = a*a % m , b >>= 1;
-    }
+    for (a%=m ; b ; a =a*a%m , b>>=1)if (b&1)res = res*a%m;
     return res;
 }
 //	O(log(mod)), mod has to be prime
-ll inv(ll b) {
-    return fpow(b, mod - 2 , mod);
+ll inv(ll a) {
+    return fpow(a, mod - 2 , mod);
 }
 
 const int N = 3e6 + 10;
