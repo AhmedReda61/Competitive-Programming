@@ -1,11 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define ll long long
-#define print(x) for(auto i : x)cout<<i<<" ";cout<<nl
-#define take(x) for(auto &i : x)cin>>i
-#define all(x) x.begin(), x.end()
-constexpr char nl = '\n';
-constexpr int mod = 1000000007;
 
 int n;
 vector<vector<int>> adj(n+1);
@@ -108,21 +102,4 @@ bool check(int s) {
         }
     }
     return true;
-}
-
-
-
-
-void fast();
-signed main() {
-    fast();
-}
-
-void fast() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-#ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-#endif
 }

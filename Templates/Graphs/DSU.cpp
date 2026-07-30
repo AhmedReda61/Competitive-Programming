@@ -1,11 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define print(x) for(auto i : x)cout<<i<<" ";cout<<nl
-#define take(x) for(auto &i : x)cin>>i
 #define all(x) x.begin(), x.end()
-constexpr char nl = '\n';
-constexpr int mod = 1000000007;
 
 struct DSU {
     vector<int> par, rnk, sz;
@@ -93,21 +89,4 @@ auto d0 = dist(0);
 int a = max_element(begin(d0) , end(d0)) - begin(d0);
 auto d1 = dist(a);
 return *max_element(begin(d1) , end(d1));
-}
-
-
-
-
-
-void fast();
-signed main() {
-    fast();
-}
-void fast() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-#ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-#endif
 }

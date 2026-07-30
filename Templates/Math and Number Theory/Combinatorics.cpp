@@ -1,12 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define print(x) for(auto i : x)cout<<i<<" ";cout<<nl
-#define take(x) for(auto &i : x)cin>>i
-#define all(x) x.begin(), x.end()
-constexpr char nl = '\n';
 constexpr int mod = 1e9 + 7;
-
 
 ll fpow(ll a, ll b , ll m = mod) {
     ll res = 1;
@@ -60,30 +55,19 @@ ll nCr_loop(ll n , ll r) { // n-r <= 2e6
     return ans;
 }
 
+ll nCr_loop2(ll n , ll r) { // r <= 2e6
+    ll ans = 1;
+    for (ll i = 1; i <= r ; ++i) { // n * n-1 .... * n-r+1
+        ans = ans * (n - i + 1) % mod;
+        ans = ans * inv(i) % mod;
+    }
+    return ans;
+}
+
 ll nPr_loop(ll n , ll r) { // r <= 2e6
     ll ans = 1;
     for (ll i = n; i >= n-r+1 ; --i) { // n * n-1 * n-2 .... n-r+1
         ans = ans * i % mod;
     }
     return ans;
-}
-
-
-
-
-
-
-void fast();
-signed main() {
-    fast();
-}
-
-
-void fast() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-#ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-#endif
 }

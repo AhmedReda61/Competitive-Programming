@@ -1,10 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define print(x) for(auto i : x)cout<<i<<" ";cout<<nl
-#define take(x) for(auto &i : x)cin>>i
-#define all(x) x.begin(), x.end()
-constexpr char nl = '\n';
 
 ll hash (string& s) {
     int p = 31 , m = 1e9 + 9;
@@ -101,21 +97,3 @@ struct double_hash {
         return { h1.get(l,r) , h2.get(l,r) };
     }
 };
-
-
-
-
-void fast();
-signed main() {
-    fast();
-}
-
-
-void fast() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-#ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-#endif
-}
