@@ -5,15 +5,12 @@ using namespace std;
 
 struct DSU {
     vector<int> par, rnk, sz;
-    int c;
+    int c; // connected components;
     DSU(int n) : par(n + 1), rnk(n + 1, 0), sz(n + 1, 1), c(n) {
         iota(par.begin(),par.end(),0);
     }
     int find(int u) {
         return (par[u] == u ? u : (par[u] = find(par[u])));
-    }
-    int operator[](int u) {
-        return find(u);
     }
     bool same(int u, int v) {
         return find(u) == find(v);
@@ -21,49 +18,40 @@ struct DSU {
     int get_size(int u) {
         return sz[find(u)];
     }
-    int count() {
-        return c;    //connected components
-    }
     int merge(int u, int v) {
         if ((u = find(u)) == (v = find(v))) return 0;
-        else --c;
-        if (rnk[u] > rnk[v]) swap(u, v);
-        par[u] = v;
-        sz[v] += sz[u];
-        if (rnk[u] == rnk[v]) rnk[v]++;
-        return v;
-    }
-    void reset() {
-        iota(par.begin(),par.end(),0);
-        fill(all(rnk),0);
-        fill(all(sz),1);
+        c--;
+        if (rnk[u] < rnk[v]) swap(u, v);
+        par[v] = u;
+        sz[u] += sz[v];
+        if (rnk[u] == rnk[v]) rnk[u]++;
+        return u;
     }
 };
 
 
-ll kruskal(vector<pair<ll,pair<int,int>>>& e , int n) { // O(E log(E))
+ll kruskal(vector<array<int , 3>>& e , int n) { // O(E log(E))
     DSU d(n);
     sort(all(e));
 
     ll mst = 0;
-    for (auto [c,edge] : e) {
-        auto [u,v] = edge;
+    for (auto [c , u , v] : e) {
         if (d.merge(u,v))mst+=c;
     }
     return mst;
 }
 
-ll prim(vector<pair<int,ll>>& adj , int n) {
+ll prim(vector<vector<array<int , 2>>>& adj , int n) {
     vector<bool> vis(n+1);
     ll mst = 0;
-    priority_queue<pair<ll,int>,vector<pair<ll,int>>,greater<>> pq;// weight , u
-    pq.emplace(0,1);
+    set<array<int,2>> pq;// weight , u
+    pq.insert({0,1});
     while (!pq.empty()) {
-        auto [w,u] = pq.top();pq.pop();
+        auto [w,u] = *pq.begin();pq.erase(pq.begin());
         if (vis[u])continue;
         vis[u] = true , mst += w;
         for (auto [v,c] : adj[u]) {
-            if (!vis[v]) pq.emplace(c,v);
+            if (!vis[v]) pq.insert({c,v});
         }
     }
     return mst;

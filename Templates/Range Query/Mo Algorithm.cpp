@@ -10,8 +10,7 @@ struct Query {
     }
 
     bool operator<(const Query &q) const {
-        if (blk_idx != q.blk_idx)return blk_idx < q.blk_idx;
-        return r < q.r;
+        return make_pair(blk_idx , r) < make_pair(q.blk_idx, q.r);
     }
 
 };
@@ -36,9 +35,9 @@ void MO_process() {
     sort(Q.begin() , Q.end());
     int l = 1 , r = 0; // 0-base
     for (int i = 0; i < Q.size() ; ++i) {
-        while (l < Q[i].l)remove(l++);
         while (l > Q[i].l)add(--l);
         while (r < Q[i].r)add(++r);
+        while (l < Q[i].l)remove(l++);
         while (r > Q[i].r)remove(r--);
         ans[Q[i].q_idx] = res;
     }
